@@ -1,0 +1,50 @@
+<project name="MyProject" default="jar" basedir=".">
+
+<property name="version">1.2.3</property>
+<property name="dir.build">build</property>
+<property name="dir.build.classes">${dir.build}/classes</property>
+<property name="dir.src">src</property>
+<property name="file.jar">${dir.build}/MyProject-${version}.jar</property>
+
+<path id = "kClassPath">
+  <fileset dir = "Lib">
+    <include name="**/*.jar"/>
+  </fileset>
+</path>
+
+  <target name="clean">
+        <echo>Cleaning...</echo>
+        <delete dir="${dir.build}"/>
+  </target>
+
+
+  <target name="init" depends="clean">
+        <echo>Creating directories...</echo>
+        <mkdir dir="${dir.build}"/>
+        <mkdir dir="${dir.build.classes}"/>
+  </target>
+
+
+  <target name="compile" depends="init">
+        <echo>Compiling Java source</echo>
+
+        <javac
+             includeantruntime="false"
+             classpathref="kClassPath"
+             srcdir="${dir.src}"
+             destdir="${dir.build.classes}" />
+  </target>
+
+
+  <target name="jar" depends="compile">
+        <echo>Making JAR file</echo>
+
+        <jar basedir="${dir.build.classes}" file="${file.jar}">
+        <manifest>
+          <attribute name = "Main-Class" value="somePackage.Main"/>
+        </manifest>
+        <zipgroupfileset dir ="lib" includes="*.jar"/>
+        </jar>
+    </target>
+
+</project>
