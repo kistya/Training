@@ -1,16 +1,4 @@
-<project name="MyProject" default="jar" basedir=".">
 
-<property name="version">1.2.3</property>
-<property name="dir.build">build</property>
-<property name="dir.build.classes">${dir.build}/classes</property>
-<property name="dir.src">src</property>
-<property name="file.jar">${dir.build}/MyProject-${version}.jar</property>
-
-<path id = "kClassPath">
-  <fileset dir = "Lib">
-    <include name="**/*.jar"/>
-  </fileset>
-</path>
 
   <target name="clean">
         <echo>Cleaning...</echo>
